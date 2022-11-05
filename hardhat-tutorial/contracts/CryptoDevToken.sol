@@ -33,9 +33,9 @@ pragma solidity ^0.8.4;
 
          require(msg.value >= requiredAmount, "Ether sent is incorrect"); 
 
-         uint ammoutWithDecimals = amount * 10**18;
+         uint amountWithDecimals = amount * 10**18;
 
-         require((totalSupply() + amountWithDecimals) <= maxtotalSupply,  "Exceeds the max total supply available.");
+         require((totalSupply() + amountWithDecimals) <= maxTotalSupply,  "Exceeds the max total supply available.");
 
          _mint(msg.sender, amountWithDecimals);
     }
@@ -71,10 +71,10 @@ pragma solidity ^0.8.4;
 
 
     function withdraw() public onlyOwner {
-        address _owner = Owner();
+        address _owner = owner();
         uint256 amount = address(this).balance;
 
-        (bool sent,) = _owner.call{vlaue: amount}("");
+        (bool sent,) = _owner.call{value: amount}("");
         require(sent, "Failed to send Ether");
     }
 
